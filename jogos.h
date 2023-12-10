@@ -1,3 +1,7 @@
+#ifndef JOGOS_H
+#define JOGOS_H
+
+#include <utility>
 #include <string>
 
 class Jogos{
@@ -17,6 +21,8 @@ class Jogos{
     void set_odds(double odds);
     double apostar(double aposta);
     void embaralhar();
-    virtual void jogar()=0;
+    void jogar();
     virtual void vitoria()=0;
 };
+
+#endif

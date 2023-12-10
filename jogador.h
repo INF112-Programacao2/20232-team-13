@@ -1,3 +1,9 @@
+#ifndef JOGADOR_H
+#define JOGADOR_H
+
+#include <string>
+#include <utility>
+
 class Jogador {
     private:
     double _carteira;
@@ -13,4 +19,10 @@ class Jogador {
     char get_cartas();
     void atualizar_carteira();
     void jogada();
+    void set_cartas(std::pair<char,std::string> cartas);
+    void set_numeroCartas(int cartas);
+    std::pair<char,std::string> get_cartas(int x);
+
 };
+
+#endif
