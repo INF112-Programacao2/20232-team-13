@@ -22,7 +22,7 @@ class Jogos{
     double apostar(double aposta);
     void embaralhar();
     void jogar();
-    virtual void vitoria()=0;
+    void vitoria();
 };
 
 #endif

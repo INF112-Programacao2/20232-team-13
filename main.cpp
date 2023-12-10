@@ -2,6 +2,7 @@
 #include "jogos.h"
 #include "blackjack.h"
 #include <iostream>
+#include "pif.h"
 
 int main() { 
     std::string Jogo;
@@ -15,9 +16,17 @@ int main() {
     std::cin >> Jogo;
 
 
-    if(Jogo == "Blackjack"){
+    /*if(Jogo == "Blackjack"){
     Jogador A(2);
     Blackjack B;
+    B.jogar(A);
+    
+    A.~Jogador();
+    }*/
+
+    if(Jogo == "PIF"){
+    Jogador A(6);
+    Pif B;
     B.jogar(A);
     
     A.~Jogador();

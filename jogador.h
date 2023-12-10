@@ -16,13 +16,12 @@ class Jogador {
 
     double get_carteira();
     int get_vitorias_seguidas();
-    char get_cartas();
+    void incrementaVitoriasSeguidas();
+    std::pair<char,std::string> get_cartas(int x);
     void atualizar_carteira();
     void jogada();
-    void set_cartas(std::pair<char,std::string> cartas);
+    void set_cartas(std::pair<char,std::string> cartas, int n);
     void set_numeroCartas(int cartas);
-    std::pair<char,std::string> get_cartas(int x);
-
 };
 
 #endif

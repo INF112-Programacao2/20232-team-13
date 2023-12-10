@@ -20,8 +20,9 @@ int Jogador::get_vitorias_seguidas() {
     return _vitorias_seguidas;
 }
 
+
 std::pair<char,std::string> Jogador::get_cartas(int x) {
-    return _cartas[x];   
+    return _cartas[x];
 }
 
 void Jogador::atualizar_carteira() {
@@ -31,18 +32,22 @@ void Jogador::atualizar_carteira() {
     _carteira += saldo;
 }
 
-/* A definir
-void Jogador::jogada() {
-
-}
-*/
-
-void Jogador::set_cartas(std::pair<char,std::string> cartas) {
-    _cartas->first=cartas.first;
-    _cartas->second=cartas.second;
+void Jogador::set_cartas(std::pair<char,std::string> cartas, int n) {
+    _cartas[n].first=cartas.first;
+    _cartas[n].second=cartas.second;
 }
 
 void Jogador::set_numeroCartas(int cartas) {
     delete[] _cartas;
     _cartas = new std::pair<char,std::string>[cartas];
 }
+
+void Jogador::incrementaVitoriasSeguidas() {
+    _vitorias_seguidas++;
+}
+
+/* A definir
+void Jogador::jogada() {
+
+}
+*/

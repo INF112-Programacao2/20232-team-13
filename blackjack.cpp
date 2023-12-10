@@ -117,7 +117,7 @@ void Blackjack::vitoria() {
 
 void Blackjack::distribuirCartas(Jogador a) { 
     for(int i=0;i<2+cont;i++){
-        a.set_cartas(_baralho[i]);
+        a.set_cartas(_baralho[i], i);
         _crupie[i].first = _baralho[i].first;
         _crupie[i].second = _baralho[i].second;
     }

@@ -1,3 +1,6 @@
+#ifndef TRUCO_H
+#define TRUCO_H
+
 #include "jogos.h"
 
 class Truco:public Jogos {
@@ -7,3 +10,4 @@ class Truco:public Jogos {
     void jogar();
     void vitoria();
 };
+#endif
