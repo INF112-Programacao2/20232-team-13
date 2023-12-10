@@ -41,6 +41,12 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "ctime": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "bit": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "optional": "cpp",
+        "string_view": "cpp",
+        "numbers": "cpp"
     }
 }
