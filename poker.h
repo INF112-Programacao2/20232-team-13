@@ -1,6 +1,6 @@
 #include "jogos.h"
 
-class Poker:Jogos {
+class Poker:public Jogos {
     public:
     Poker();
     ~Poker();

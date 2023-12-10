@@ -1,6 +1,6 @@
 #include "jogos.h"
 
-class Truco:Jogos {
+class Truco:public Jogos {
     public:
     Truco();
     ~Truco();

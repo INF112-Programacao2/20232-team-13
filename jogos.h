@@ -1,18 +1,22 @@
+#include <string>
+
 class Jogos{
-    private:
+    protected:
     double _odds;
-    char *crupie;
-    char *baralho;
+    char _valor[13] = {'2','3','4','5','6','7','8','9','D','J','Q','K','A'};
+    std::string _naipes[4] = {"Copas", "Ouro", "Paus", "Espadas"};
+    std::pair<char,std::string> *_crupie ;
+    std::pair<char,std::string> *_baralho ;
 
     public:
-    Jogos();
+    Jogos(int crupie, int baralho);
     ~Jogos();
     double get_odds();
-    char get_crupie();
-    char get_baralho();
+    char get_valor(int x);
+    std::string get_naipes(int x);
     void set_odds(double odds);
-    void apostar(double aposta);
+    double apostar(double aposta);
+    void embaralhar();
     virtual void jogar()=0;
     virtual void vitoria()=0;
-    void embaralhar();
 };
