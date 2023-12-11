@@ -1,5 +1,6 @@
 #include "jogador.h"
 #include <iostream>
+#include <string>
 
 Jogador::Jogador(int cartas){ 
     std::cout << "Qual a quantia desejada para deposito?" << std::endl;

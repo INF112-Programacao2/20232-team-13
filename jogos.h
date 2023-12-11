@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <string>
+#include "jogador.h"
 
 class Jogos{
     protected:
@@ -21,8 +22,8 @@ class Jogos{
     void set_odds(double odds);
     double apostar(double aposta);
     void embaralhar();
-    void jogar();
-    void vitoria();
+    virtual void jogar(Jogador a)=0;
+    virtual void vitoria(Jogador a)=0;
 };
 
 #endif

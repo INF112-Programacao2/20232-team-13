@@ -8,8 +8,8 @@ class Pif:public Jogos {
     public:
     Pif();
     ~Pif();
-    void jogar(Jogador a);
-    void vitoria(Jogador a);
+    void jogar(Jogador a) override;
+    void vitoria(Jogador a) override;
     void distribuirCartas(Jogador a);
     int valorCarta(std::pair<char,std::string> cartas);
 };

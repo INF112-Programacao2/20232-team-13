@@ -9,8 +9,7 @@ _crupie=new std::pair<char,std::string>[crupie];
 _baralho=new std::pair<char,std::string>[baralho];
 for(int i=0;i<52;i++) {
         _baralho[i].first='N';
-        
-    }
+}
 }
 
 Jogos::~Jogos() {

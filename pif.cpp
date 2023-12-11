@@ -11,10 +11,8 @@ Pif::~Pif() {}
 void Pif::jogar(Jogador a) {
 
 embaralhar();
-
 distribuirCartas(a);
-
-
+a.set_cartas(_baralho[12], 0);
 
 std::pair<char,std::string> descarte;
 int cont=12;
@@ -37,8 +35,9 @@ while(true) {
     cont++;
     std::pair<char,std::string> carta;
     std::cout << "Carta no descarte: " << descarte.first << " de " << descarte.second << std::endl;
-    std::cout << "Quer comprar do descarte ou do baralho de compra?(sim ou nao)" << std::endl;
+    std::cout << "Quer comprar do descarte ?(sim ou nao)" << std::endl;
     std::cin >> pergunta;
+    std::cout << std::endl;
     if(pergunta=="sim") {
         std::cout << "Qual carta quer descartar?(posicao de 1 a 6)" << std::endl;
         for(int i=0;i<6;i++) {
@@ -46,7 +45,9 @@ while(true) {
             carta.second=a.get_naipeCartas(i);
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
+        std::cout << std::endl;
         std::cin >> aux1;
+        std::cout << std::endl;
         a.set_cartas(descarte, aux1-1);
 
         for(int i=0;i<6;i++) {
@@ -54,7 +55,8 @@ while(true) {
             carta.second=a.get_naipeCartas(i);
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
-        
+
+        std::cout << std::endl;
     }
     else {
         std::cout << "Proxima carta do baralho de compra: " << _baralho[cont].first << " de " << _baralho[cont].second << std::endl;
@@ -64,7 +66,9 @@ while(true) {
             carta.second=a.get_naipeCartas(i);
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
+        std::cout << std::endl;
         std::cin >> aux1;
+        std::cout << std::endl;
         a.set_cartas(_baralho[cont], aux1-1);
         cont++;
 
@@ -73,10 +77,12 @@ while(true) {
             carta.second=a.get_naipeCartas(i);
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
+        std::cout << std::endl;
     }
     
     std::cout << "Quer bater?(sim ou nao)" << std::endl;
     std::cin >> pergunta;
+    std::cout << std::endl;
     if(pergunta=="sim") {
         int ordem[6];
         std::cout << "Digite as duas trincas/sequencias da sua mao (posicao de 1 a 6)" << std::endl;
@@ -85,10 +91,18 @@ while(true) {
             carta.second=a.get_naipeCartas(i);
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
+        std::cout << std::endl;
+
         for(int i=0;i<6;i++) 
             std::cin >> ordem[i];
+
+        std::cout << std::endl;
+
+        for(int i=0;i<6;i++) 
+            ordem[i]--;
         
-            bool teste1=false,teste2=false;
+            bool teste1=false;
+            bool teste2=false;
             std::pair<char,std::string> carta1;
             std::pair<char,std::string> carta2;
             std::pair<char,std::string> carta3;
@@ -103,7 +117,7 @@ while(true) {
 
             if(((valorCarta(carta1)==(valorCarta(carta2)-1))&&(valorCarta(carta2)==(valorCarta(carta3)-1))&&(carta1.second==carta2.second)&&(carta2.second==carta3.second))||((valorCarta(carta1)==valorCarta(carta2))&&(valorCarta(carta2)==valorCarta(carta3))))
                 teste1=true;
-
+                                  
             carta1.first=a.get_valorCartas(ordem[3]);
             carta1.second=a.get_naipeCartas(ordem[3]);
             carta2.first=a.get_valorCartas(ordem[4]);
@@ -113,10 +127,10 @@ while(true) {
 
             if(((valorCarta(carta1)==(valorCarta(carta2)-1))&&(valorCarta(carta2)==(valorCarta(carta3)-1))&&(carta1.second==carta2.second)&&(carta2.second==carta3.second))||((valorCarta(carta1)==valorCarta(carta2))&&(valorCarta(carta2)==valorCarta(carta3))))
                 teste2=true;
-                
+                               
             if(teste1&&teste2) {
-                std::cout << "Ganhou!!!" << std::endl;
-                a.incrementaVitoriasSeguidas();
+                std::cout << "Parabens, voce ganhou!!!" << std::endl;
+                vitoria(a);
                 break;
             }
             if(teste1==false||teste2==false) {
@@ -136,7 +150,7 @@ while(true) {
 
 
 void Pif::vitoria(Jogador a) {
-
+    a.incrementaVitoriasSeguidas();
 }
 
 void Pif::distribuirCartas(Jogador a) {
