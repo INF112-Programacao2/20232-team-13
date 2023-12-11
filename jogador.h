@@ -17,7 +17,8 @@ class Jogador {
     double get_carteira();
     int get_vitorias_seguidas();
     void incrementaVitoriasSeguidas();
-    std::pair<char,std::string> get_cartas(int x);
+    char get_valorCartas(int x);
+    std::string get_naipeCartas(int x);
     void atualizar_carteira();
     void jogada();
     void set_cartas(std::pair<char,std::string> cartas, int n);

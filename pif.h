@@ -11,6 +11,6 @@ class Pif:public Jogos {
     void jogar(Jogador a);
     void vitoria(Jogador a);
     void distribuirCartas(Jogador a);
-    int valorCarta(std::pair<char,std::string> cartaa);
+    int valorCarta(std::pair<char,std::string> cartas);
 };
 #endif

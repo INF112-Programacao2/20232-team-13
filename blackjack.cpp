@@ -57,7 +57,8 @@ void Blackjack::jogar(Jogador a) {
     while(true) {
         std::cout << "Suas Cartas: " << std::endl;
         for(int i=0;i<cont;i++){
-            carta = a.get_cartas(i);
+            carta.first = a.get_valorCartas(i);
+            carta.second = a.get_naipeCartas(i);
             std::cout << carta.first << " de " << carta.second << std::endl;
             pontuacao += calcularValorDaMao(carta);
         }

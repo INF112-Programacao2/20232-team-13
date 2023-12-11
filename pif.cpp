@@ -9,16 +9,23 @@ Jogos(6,52) {}
 Pif::~Pif() {}
 
 void Pif::jogar(Jogador a) {
+
 embaralhar();
+
 distribuirCartas(a);
+
+
+
 std::pair<char,std::string> descarte;
 int cont=12;
 int aux,aux1;
 std::string pergunta;
+std::pair<char,std::string> carta;
 
 for(int i=0;i<6;i++) {
-std::pair<char,std::string> carta=a.get_cartas(i);
-std::cout << carta.first << " de " << carta.second << std::endl;
+carta.first=a.get_valorCartas(i);
+carta.second=a.get_naipeCartas(i);
+std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
 }
 
 while(true) {
@@ -28,28 +35,44 @@ while(true) {
     _crupie[aux].first=_baralho[cont].first;
     _crupie[aux].second=_baralho[cont].second;
     cont++;
-    std::cout << descarte.first << " de " << descarte.second << std::endl;
+    std::pair<char,std::string> carta;
+    std::cout << "Carta no descarte: " << descarte.first << " de " << descarte.second << std::endl;
     std::cout << "Quer comprar do descarte ou do baralho de compra?(sim ou nao)" << std::endl;
     std::cin >> pergunta;
     if(pergunta=="sim") {
         std::cout << "Qual carta quer descartar?(posicao de 1 a 6)" << std::endl;
         for(int i=0;i<6;i++) {
-            std::pair<char,std::string> carta=a.get_cartas(i);
-            std::cout << carta.first << " de " << carta.second << std::endl;
+            carta.first=a.get_valorCartas(i);
+            carta.second=a.get_naipeCartas(i);
+            std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
         std::cin >> aux1;
-        a.set_cartas(descarte, aux1);
+        a.set_cartas(descarte, aux1-1);
+
+        for(int i=0;i<6;i++) {
+            carta.first=a.get_valorCartas(i);
+            carta.second=a.get_naipeCartas(i);
+            std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
+        }
+        
     }
     else {
         std::cout << "Proxima carta do baralho de compra: " << _baralho[cont].first << " de " << _baralho[cont].second << std::endl;
         std::cout << "Qual carta quer descartar?(posicao de 1 a 6)" << std::endl;
         for(int i=0;i<6;i++) {
-            std::pair<char,std::string> carta=a.get_cartas(i);
-            std::cout << carta.first << " de " << carta.second << std::endl;
+            carta.first=a.get_valorCartas(i);
+            carta.second=a.get_naipeCartas(i);
+            std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
         std::cin >> aux1;
-        a.set_cartas(descarte, aux1);
+        a.set_cartas(_baralho[cont], aux1-1);
         cont++;
+
+        for(int i=0;i<6;i++) {
+            carta.first=a.get_valorCartas(i);
+            carta.second=a.get_naipeCartas(i);
+            std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
+        }
     }
     
     std::cout << "Quer bater?(sim ou nao)" << std::endl;
@@ -58,34 +81,45 @@ while(true) {
         int ordem[6];
         std::cout << "Digite as duas trincas/sequencias da sua mao (posicao de 1 a 6)" << std::endl;
         for(int i=0;i<6;i++) {
-            std::pair<char,std::string> carta=a.get_cartas(i);
-            std::cout << carta.first << " de " << carta.second << std::endl;
+            carta.first=a.get_valorCartas(i);
+            carta.second=a.get_naipeCartas(i);
+            std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
         for(int i=0;i<6;i++) 
             std::cin >> ordem[i];
         
-            bool teste1=0,teste2=0;
+            bool teste1=false,teste2=false;
             std::pair<char,std::string> carta1;
             std::pair<char,std::string> carta2;
             std::pair<char,std::string> carta3;
-            carta1=a.get_cartas(ordem[0]);
-            carta2=a.get_cartas(ordem[1]);
-            carta3=a.get_cartas(ordem[2]);
-            if((valorCarta(carta1)==(valorCarta(carta2)-1)&&valorCarta(carta2)==(valorCarta(carta3)-1)&&carta1.second==carta2.second&&carta2.second==carta3.second)||(valorCarta(carta1)==valorCarta(carta2)&&valorCarta(carta2)==valorCarta(carta3)))
+
+            carta1.first=a.get_valorCartas(ordem[0]);
+            carta1.second=a.get_naipeCartas(ordem[0]);
+            carta2.first=a.get_valorCartas(ordem[1]);
+            carta2.second=a.get_naipeCartas(ordem[1]);
+            carta3.first=a.get_valorCartas(ordem[2]);
+            carta3.second=a.get_naipeCartas(ordem[2]);
+            
+
+            if(((valorCarta(carta1)==(valorCarta(carta2)-1))&&(valorCarta(carta2)==(valorCarta(carta3)-1))&&(carta1.second==carta2.second)&&(carta2.second==carta3.second))||((valorCarta(carta1)==valorCarta(carta2))&&(valorCarta(carta2)==valorCarta(carta3))))
                 teste1=true;
-            carta1=a.get_cartas(ordem[3]);
-            carta2=a.get_cartas(ordem[4]);
-            carta3=a.get_cartas(ordem[5]);
-            if((valorCarta(carta1)==(valorCarta(carta2)-1)&&valorCarta(carta2)==(valorCarta(carta3)-1)&&carta1.second==carta2.second&&carta2.second==carta3.second)||(valorCarta(carta1)==valorCarta(carta2)&&valorCarta(carta2)==valorCarta(carta3)))
+
+            carta1.first=a.get_valorCartas(ordem[3]);
+            carta1.second=a.get_naipeCartas(ordem[3]);
+            carta2.first=a.get_valorCartas(ordem[4]);
+            carta2.second=a.get_naipeCartas(ordem[4]);
+            carta3.first=a.get_valorCartas(ordem[5]);
+            carta3.second=a.get_naipeCartas(ordem[5]);
+
+            if(((valorCarta(carta1)==(valorCarta(carta2)-1))&&(valorCarta(carta2)==(valorCarta(carta3)-1))&&(carta1.second==carta2.second)&&(carta2.second==carta3.second))||((valorCarta(carta1)==valorCarta(carta2))&&(valorCarta(carta2)==valorCarta(carta3))))
                 teste2=true;
                 
-
             if(teste1&&teste2) {
                 std::cout << "Ganhou!!!" << std::endl;
                 a.incrementaVitoriasSeguidas();
                 break;
             }
-            else {
+            if(teste1==false||teste2==false) {
                 std::cout << "Blefe, perdeu!" << std::endl;
                 break;
             }
@@ -142,5 +176,5 @@ int Pif::valorCarta(std::pair<char,std::string> cartas) {
     if(cartas.first=='A') {
         return valorReal =1;
     }
-
+    return valorReal;
 }
