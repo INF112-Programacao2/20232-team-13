@@ -16,13 +16,13 @@ int main() {
     std::cin >> Jogo;
 
 
-    /*if(Jogo == "Blackjack"){
-    Jogador A(2);
+    if(Jogo == "Blackjack"){
+    Jogador A(10);
     Blackjack B;
     B.jogar(A);
     
     A.~Jogador();
-    }*/
+    }
 
     if(Jogo == "PIF"){
     Jogador A(6);

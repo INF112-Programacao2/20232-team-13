@@ -4,6 +4,10 @@
 
 int contcrupie = 2;
 int cont = 2;
+int cartasdadas = 4;
+int pontuacao = 0;
+int pontuacaoBot = 0;
+
 
 Blackjack::Blackjack() : 
 Jogos(10,52) {}
@@ -37,9 +41,7 @@ int Blackjack::valorCarta(std::pair<char,std::string> cartas) {
     if(cartas.first=='K') 
         return valorReal = 10;
     if(cartas.first=='A') {
-        std::cout << "Escreva o valor que voce deseja que seu As receba (1 ou 11) : " << std::endl;
-        std::cin >> valorReal;
-        return valorReal;
+        return valorReal = 1;
     }
     return 0;
 }
@@ -47,12 +49,11 @@ int Blackjack::valorCarta(std::pair<char,std::string> cartas) {
 void Blackjack::jogar(Jogador a) {
     embaralhar();
     distribuirCartas(a);
+    a.set_cartas(_baralho[12], 0);
     std::pair<char,std::string> carta;
-    int pontuacao = 0;
-    int pontuacaoBot = 0;
     int contaux = 0;
     std::string decisao;
-
+    bool estorou = false;
 
     while(true) {
         std::cout << "Suas Cartas: " << std::endl;
@@ -67,43 +68,107 @@ void Blackjack::jogar(Jogador a) {
         for(int i=0; i<1+contaux; i++){
         std::cout << _crupie[i].first << " de " << _crupie[i].second << std::endl;
         }
-
-        if(pontuacao > 21) {
-            std::cout << "Sua mao passou de 21! Voce perdeu :( !!" << std::endl;
-            break;
-            }
         
-        std::cout << "Sua pontuacao: " << pontuacao << std::endl;
+       std::cout << "Sua pontuacao: " << pontuacao << std::endl;
         std::cout << "Quer pegar mais uma carta? (Responda com sim ou nao!) : " << std::endl;
         std::cin >> decisao;
 
-
-    if(decisao == "sim"){
+    while (decisao=="sim"){
+        pontuacao = 0;
         cont++;
+        a.set_cartas(_baralho[cartasdadas], cont-1);
+        std::cout << "Suas Cartas: " << std::endl;
+        for(int i=0;i<cont;i++){
+            carta.first = a.get_valorCartas(i);
+            carta.second = a.get_naipeCartas(i);
+            std::cout << carta.first << " de " << carta.second << std::endl;
+            pontuacao += calcularValorDaMao(carta);
+        }
+        std::cout << "Sua pontuacao: " << pontuacao << std::endl;
+        if(pontuacao > 21) {
+            std::cout << "Sua mao passou de 21! Voce perdeu :( !!" << std::endl;
+            estorou = true;
+            break;
+            }
+        std::cout << "Quer pegar mais uma carta? (Responda com sim ou nao!) : " << std::endl;
+        std::cin >> decisao;
+        cartasdadas++;
     }
 
-    pontuacaoBot = calcularValorCrupie();
-
-    while(decisao == "sim" && pontuacaoBot<pontuacao){
-        contcrupie++;
-        contaux++;
-    }
-        
-
-    if((decisao == "nao") && ((pontuacao > pontuacaoBot) || (pontuacaoBot > 21))) {
-        std::cout << "Carta do Crupie: " << std::endl;
-        for(int i=0; i<2+contaux; i++){
-            std::cout << _crupie[i].first << " de " << _crupie[i].second << std::endl;
+   if(estorou)
+    break;
+    
+    std::cout << "Carta do Crupie: " << std::endl;
+        for(int i=0; i<contcrupie; i++){
+        std::cout << _crupie[i].first << " de " << _crupie[i].second << std::endl;
         }
 
+    pontuacaoBot = calcularValorCrupie();
+    std::cout << "Pontuacao do crupie: ";
+    std::cout << pontuacaoBot << std::endl;
+
+    while(pontuacaoBot<pontuacao){
+        
+        _crupie[contcrupie].first = _baralho[cartasdadas].first;
+        _crupie[contcrupie].second = _baralho[cartasdadas].second;
+        
+        cartasdadas++;
+        for(int i=0; i<contcrupie; i++){
+            std::cout << _crupie[i].first << " de " << _crupie[i].second << std::endl;
+        }
+        contcrupie++;
+        pontuacaoBot = 0;
+        pontuacaoBot = calcularValorCrupie();
+        std::cout << "Pontuacao do crupie: " << pontuacao << std::endl;
+        std::cout << pontuacaoBot << std::endl;
+    }
+        
+    if((decisao == "nao") && ((pontuacao > pontuacaoBot) || (pontuacaoBot > 21))) {
+        std::cout << "Suas Cartas: " << std::endl;
+        for(int i=0;i<cont;i++){
+            carta.first = a.get_valorCartas(i);
+            carta.second = a.get_naipeCartas(i);
+            std::cout << carta.first << " de " << carta.second << std::endl;
+        }
+        std::cout << "Carta do Crupie: " << std::endl;
+        for(int i=0; i<contcrupie; i++){
+            std::cout << _crupie[i].first << " de " << _crupie[i].second << std::endl;
+        }
+        std::cout << "Pontuacao do Crupie: " << pontuacaoBot << std::endl;
+        std::cout << "Sua pontuacao: " << pontuacao << std::endl;
         std::cout << "Voce ganhou! Parabens!! :)" << std::endl;
+        vitoria(a);
         break;
     }
     else if(decisao == "nao" && pontuacao == pontuacaoBot) {
+        std::cout << "Suas Cartas: " << std::endl;
+        for(int i=0;i<cont;i++){
+            carta.first = a.get_valorCartas(i);
+            carta.second = a.get_naipeCartas(i);
+            std::cout << carta.first << " de " << carta.second << std::endl;
+        }
+        std::cout << "Carta do Crupie: " << std::endl;
+        for(int i=0; i<contcrupie; i++){
+            std::cout << _crupie[i].first << " de " << _crupie[i].second << std::endl;
+        }
+        std::cout << "Pontuacao do Crupie: " << pontuacaoBot << std::endl;
+        std::cout << "Sua pontuacao: " << pontuacao << std::endl;
         std::cout << "Empate! :|" << std::endl;
         break;
     } 
     else if(decisao == "nao" && pontuacao<pontuacaoBot){
+        std::cout << "Suas Cartas: " << std::endl;
+        for(int i=0;i<cont;i++){
+            carta.first = a.get_valorCartas(i);
+            carta.second = a.get_naipeCartas(i);
+            std::cout << carta.first << " de " << carta.second << std::endl;
+        }
+        std::cout << "Carta do Crupie: " << std::endl;
+        for(int i=0; i<contcrupie; i++){
+            std::cout << _crupie[i].first << " de " << _crupie[i].second << std::endl;
+        }
+        std::cout << "Pontuacao do Crupie: " << pontuacaoBot << std::endl;
+        std::cout << "Sua pontuacao: " << pontuacao << std::endl;
         std::cout << "Voce perdeu! :(" << std::endl;
         break;
     }
@@ -112,26 +177,21 @@ void Blackjack::jogar(Jogador a) {
 
 }
 
-void Blackjack::vitoria() {
-
+void Blackjack::vitoria(Jogador a) {
+    a.incrementaVitoriasSeguidas();
 }
 
 void Blackjack::distribuirCartas(Jogador a) { 
-    for(int i=0;i<2+cont;i++){
+    for(int i=0;i<2;i++){
         a.set_cartas(_baralho[i], i);
-        _crupie[i].first = _baralho[i].first;
-        _crupie[i].second = _baralho[i].second;
+        _crupie[i].first = _baralho[i+2].first;
+        _crupie[i].second = _baralho[i+2].second;
     }
 
 }
 
 int Blackjack::calcularValorDaMao(std::pair<char,std::string> cartas) {
-    int valor = 0;
-    for(int i=0; i<cont; i++){
-        valor = valorCarta(cartas);
-    }
-    
-    return valor;
+    return valorCarta(cartas);
 }
 
 int Blackjack::calcularValorCrupie() {

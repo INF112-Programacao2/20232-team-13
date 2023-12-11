@@ -10,8 +10,8 @@ class Blackjack:public Jogos {
     public:
     Blackjack();
     ~Blackjack();
-    void jogar(Jogador a);
-    void vitoria();
+    void jogar(Jogador a) override;
+    void vitoria(Jogador a) override;
     int valorCarta(std::pair<char,std::string> cartas);
     void distribuirCartas(Jogador a);
     int calcularValorDaMao(std::pair<char,std::string> cartas);
