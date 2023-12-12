@@ -7,9 +7,11 @@
 #include "jogador.h"
 
 class Blackjack:public Jogos {
+
     public:
     Blackjack();
     ~Blackjack();
+    
     void jogar(Jogador a) override;
     double vitoria(Jogador a) override;
     int valorCarta(std::pair<char,std::string> cartas);

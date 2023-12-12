@@ -14,39 +14,39 @@ int main() {
     std::cin >> carteira;
 
     while(Jogo!="Parar") {    
-    std::cout << "Qual jogo voce quer jogar? (Digite Parar para sair): " << std::endl;
-    std::cout << "1.Blackjack" << std::endl;
-    std::cout << "2.PIF" << std::endl;
-    std::cout << "3.Truco" << std::endl;
-    std::cin >> Jogo;
+        std::cout << "Qual jogo voce quer jogar? (Digite Parar para sair): " << std::endl;
+        std::cout << "1.Blackjack" << std::endl;
+        std::cout << "2.PIF" << std::endl;
+        std::cout << "3.Truco" << std::endl;
+        std::cin >> Jogo;
 
 
-    if(Jogo == "Blackjack"){
-    carteira-=10;
-    Jogador A(10);
-    Blackjack B;
-    B.jogar(A);
+        if(Jogo == "Blackjack"){
+            carteira-=10;
+            Jogador A(10);
+            Blackjack B;
+            B.jogar(A);
     
-    A.~Jogador();
-    }
+            A.~Jogador();
+        }
 
-    if(Jogo == "PIF"){
-    carteira-=10;
-    Jogador A(6);
-    Pif B;
-    B.jogar(A);
+        if(Jogo == "PIF"){
+            carteira-=10;
+            Jogador A(6);
+            Pif B;
+            B.jogar(A);
     
-    A.~Jogador();
-    }
+            A.~Jogador();
+        }
 
 
-    if(Jogo == "Truco"){
-    Jogador A(3);
-    carteira-=10;
-    Truco B;
-    B.jogar(A);
-    A.~Jogador();
-    }
+        if(Jogo == "Truco"){
+            carteira-=10;
+            Jogador A(3);
+            Truco B;
+            B.jogar(A);
+            A.~Jogador();
+        }
     }
 
     std::cout << "Saldo: " << carteira << std::endl;    

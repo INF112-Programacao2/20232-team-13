@@ -5,9 +5,11 @@
 #include "jogador.h"
 
 class Pif:public Jogos {
+
     public:
     Pif();
     ~Pif();
+    
     void jogar(Jogador a) override;
     double vitoria(Jogador a) override;
     void distribuirCartas(Jogador a);

@@ -7,7 +7,7 @@ Jogador::Jogador(int cartas){
     _cartas = new std::pair<char,std::string>[cartas];
 }
 
-Jogador::~Jogador() { 
+Jogador::~Jogador(){ 
     delete[] _cartas;
 }
 

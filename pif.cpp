@@ -21,23 +21,26 @@ std::string pergunta;
 std::pair<char,std::string> carta;
 
 for(int i=0;i<6;i++) {
-carta.first=a.get_valorCartas(i);
-carta.second=a.get_naipeCartas(i);
-std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
+    carta.first=a.get_valorCartas(i);
+    carta.second=a.get_naipeCartas(i);
+    std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
 }
 
 while(true) {
+
     aux=rand()%6;
     descarte.first=_crupie[aux].first;
     descarte.second=_crupie[aux].second;
     _crupie[aux].first=_baralho[cont].first;
     _crupie[aux].second=_baralho[cont].second;
     cont++;
+
     std::pair<char,std::string> carta;
     std::cout << "Carta no descarte: " << descarte.first << " de " << descarte.second << std::endl;
     std::cout << "Quer comprar do descarte ?(sim ou nao)" << std::endl;
     std::cin >> pergunta;
     std::cout << std::endl;
+
     if(pergunta=="sim") {
         std::cout << "Qual carta quer descartar?(posicao de 1 a 6)" << std::endl;
         for(int i=0;i<6;i++) {
@@ -45,6 +48,7 @@ while(true) {
             carta.second=a.get_naipeCartas(i);
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
+
         std::cout << std::endl;
         std::cin >> aux1;
         std::cout << std::endl;
@@ -58,17 +62,21 @@ while(true) {
 
         std::cout << std::endl;
     }
+
     else {
         std::cout << "Proxima carta do baralho de compra: " << _baralho[cont].first << " de " << _baralho[cont].second << std::endl;
         std::cout << "Qual carta quer descartar?(posicao de 1 a 6)" << std::endl;
+
         for(int i=0;i<6;i++) {
             carta.first=a.get_valorCartas(i);
             carta.second=a.get_naipeCartas(i);
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
+
         std::cout << std::endl;
         std::cin >> aux1;
         std::cout << std::endl;
+
         a.set_cartas(_baralho[cont], aux1-1);
         cont++;
 
@@ -77,13 +85,16 @@ while(true) {
             carta.second=a.get_naipeCartas(i);
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
+
         std::cout << std::endl;
     }
     
     std::cout << "Quer bater?(sim ou nao)" << std::endl;
     std::cin >> pergunta;
     std::cout << std::endl;
+
     if(pergunta=="sim") {
+
         int ordem[6];
         std::cout << "Digite as duas trincas/sequencias da sua mao (posicao de 1 a 6)" << std::endl;
         for(int i=0;i<6;i++) {
@@ -96,7 +107,7 @@ while(true) {
         for(int i=0;i<6;i++) 
             std::cin >> ordem[i];
 
-        std::cout << std::endl;
+            std::cout << std::endl;
 
         for(int i=0;i<6;i++) 
             ordem[i]--;

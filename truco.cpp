@@ -11,6 +11,7 @@ Truco::Truco() : Jogos(3,52) {}
 Truco::~Truco() {}
 
 void Truco::jogar(Jogador a) { 
+
     embaralhar();
     distribuirCartas(a);
     a.set_cartas(_baralho[3+aux], 0);
@@ -45,12 +46,15 @@ void Truco::jogar(Jogador a) {
     std::cout << std::endl;
 
     if((escolha==1)){
+
         carta.first = a.get_valorCartas(0);
         carta.second = a.get_naipeCartas(0);
+
         std::cout << "Sua carta: " << std::endl;
         std::cout << a.get_valorCartas(0) << " de " << a.get_naipeCartas(0) << std::endl;
         std::cout << "Carta do crupie: " << std::endl;
         std::cout << _crupie[0].first << " de " << _crupie[0].second << std::endl;
+
         if(valorCarta(carta)>valorCarta(_crupie[0])){
             placar++;
             std::cout << "Voce ganhou a rodada :)" << std::endl;
@@ -73,6 +77,7 @@ void Truco::jogar(Jogador a) {
     if(escolha==2 && rodada==1){
         carta.first = a.get_valorCartas(1);
         carta.second = a.get_naipeCartas(1);
+
         std::cout << "Sua carta: " << std::endl;
         std::cout << a.get_valorCartas(1) << " de " << a.get_naipeCartas(1) << std::endl;
         std::cout << "Carta do crupie: " << std::endl;

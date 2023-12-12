@@ -6,6 +6,7 @@
 #include "jogador.h"
 
 class Jogos{
+
     protected:
     double _odds;
     char _valor[13] = {'2','3','4','5','6','7','8','9','D','J','Q','K','A'};
@@ -16,6 +17,7 @@ class Jogos{
     public:
     Jogos(int crupie, int baralho);
     ~Jogos();
+    
     double get_odds();
     char get_valor(int x);
     std::string get_naipes(int x);

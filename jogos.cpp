@@ -4,12 +4,13 @@
 
 
 Jogos::Jogos(int crupie, int baralho) {
-_odds=2.0;
-_crupie=new std::pair<char,std::string>[crupie];
-_baralho=new std::pair<char,std::string>[baralho];
-for(int i=0;i<52;i++) {
+    _odds=2.0;
+    _crupie=new std::pair<char,std::string>[crupie];
+    _baralho=new std::pair<char,std::string>[baralho];
+    
+    for(int i=0;i<52;i++) {
         _baralho[i].first='N';
-}
+    }
 }
 
 Jogos::~Jogos() {
@@ -37,7 +38,9 @@ double Jogos::apostar(double aposta) {
 }
 
 void Jogos::embaralhar() {
-srand(time(0));
+    
+    srand(time(0));
+    
     for(int j=0;j<4;j++) {
         for(int k=0;k<13;k++) {
             int aux=(rand()%52);

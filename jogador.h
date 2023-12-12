@@ -5,6 +5,7 @@
 #include <utility>
 
 class Jogador {
+
     private:
     int _vitorias_seguidas;
     std::pair<char,std::string> *_cartas;
@@ -19,6 +20,7 @@ class Jogador {
     std::string get_naipeCartas(int x);
     void set_cartas(std::pair<char,std::string> cartas, int n);
     void set_numeroCartas(int cartas);
+    
 };
 
 #endif
