@@ -158,7 +158,7 @@ void Blackjack::jogar(Jogador a) {
             pontuacaoBot = calcularValorCrupie();
 
             std::cout << "------------" << std::endl;
-            std::cout << "Pontuacao do crupie: " << pontuacao << std::endl;
+            std::cout << "Pontuacao do crupie: ";
             std::cout << pontuacaoBot << std::endl;
         }
     
