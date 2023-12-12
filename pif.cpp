@@ -149,8 +149,9 @@ while(true) {
 
 
 
-void Pif::vitoria(Jogador a) {
+double Pif::vitoria(Jogador a) {
     a.incrementaVitoriasSeguidas();
+    return apostar(10);
 }
 
 void Pif::distribuirCartas(Jogador a) {

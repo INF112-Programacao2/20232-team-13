@@ -7,10 +7,14 @@
 
 int main() { 
     std::string Jogo;
-    std::cout << "Bem Vindo ao Cassino!!!!" << std::endl;
-    
+    double carteira;
 
-    std::cout << "Qual jogo voce quer jogar?: " << std::endl;
+    std::cout << "Bem Vindo ao Cassino!!!!" << std::endl;
+    std::cout << "Qual a quantia desejada para deposito?" << std::endl;
+    std::cin >> carteira;
+
+    while(Jogo!="Parar") {    
+    std::cout << "Qual jogo voce quer jogar? (Digite Parar para sair): " << std::endl;
     std::cout << "1.Blackjack" << std::endl;
     std::cout << "2.PIF" << std::endl;
     std::cout << "3.Truco" << std::endl;
@@ -18,6 +22,7 @@ int main() {
 
 
     if(Jogo == "Blackjack"){
+    carteira-=10;
     Jogador A(10);
     Blackjack B;
     B.jogar(A);
@@ -26,6 +31,7 @@ int main() {
     }
 
     if(Jogo == "PIF"){
+    carteira-=10;
     Jogador A(6);
     Pif B;
     B.jogar(A);
@@ -36,12 +42,14 @@ int main() {
 
     if(Jogo == "Truco"){
     Jogador A(3);
+    carteira-=10;
     Truco B;
     B.jogar(A);
     A.~Jogador();
     }
+    }
 
-
+    std::cout << "Saldo: " << carteira << std::endl;    
 
     return 0;
 }

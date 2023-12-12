@@ -2,21 +2,33 @@
 #include "jogador.h"
 #include "truco.h"
 #include <iostream>
+#include <string>
 
 int aux = 0;
 
-Truco::Truco() : Jogos(3,52) { }
+Truco::Truco() : Jogos(3,52) {}
     
-Truco::~Truco() { }
-
+Truco::~Truco() {}
 
 void Truco::jogar(Jogador a) { 
     embaralhar();
     distribuirCartas(a);
     a.set_cartas(_baralho[3+aux], 0);
-
     std::pair<char,std::string> carta;
     
+    for(int i=0;i<3;i++) {
+        carta.first=a.get_valorCartas(i);
+        carta.second=a.get_naipeCartas(i);
+        
+        while(valorCarta(carta)==20) {
+            carta.first=_baralho[aux+i].first;
+            carta.second=_baralho[aux+i].second;
+            aux++;
+        }
+       
+        a.set_cartas(carta, i);
+    }
+   
     int placar = 0;
     int rodada = 1;
     int escolha;
@@ -30,11 +42,9 @@ void Truco::jogar(Jogador a) {
 
     std::cout << "Faca sua jogada: " << std::endl;
     std::cin >> escolha;
-    std::cout << "aqui" << std::endl;
-    std::cout << escolha << std::endl;
+    std::cout << std::endl;
 
     if((escolha==1)){
-        std::cout << "aqui" << std::endl;
         carta.first = a.get_valorCartas(0);
         carta.second = a.get_naipeCartas(0);
         std::cout << "Sua carta: " << std::endl;
@@ -203,9 +213,6 @@ void Truco::jogar(Jogador a) {
         carta.second = "vazio";
         a.set_cartas(carta, 0);
 
-            
-        std::cout << "Qual sua proxima escolha?: " << std::endl;
-        std::cin >> escolha;
         rodada++;
         std::cout << std::endl;
     }
@@ -227,10 +234,7 @@ void Truco::jogar(Jogador a) {
         carta.first = '0';
         carta.second = "vazio";
         a.set_cartas(carta, 1);
-
-            
-        std::cout << "Qual sua proxima escolha?: " << std::endl;
-        std::cin >> escolha;
+                
         rodada++;
         std::cout << std::endl;
     }
@@ -252,10 +256,7 @@ void Truco::jogar(Jogador a) {
         carta.first = '0';
         carta.second = "vazio";
         a.set_cartas(carta, 2);
-
-            
-        std::cout << "Qual sua proxima escolha?: " << std::endl;
-        std::cin >> escolha;
+       
         rodada++;
         std::cout << std::endl;
     }
@@ -268,8 +269,9 @@ void Truco::jogar(Jogador a) {
         std::cout << "VOCE PERDEU! :(((" << std::endl;
 }
 
-void Truco::vitoria(Jogador a) {
+double Truco::vitoria(Jogador a) {
     a.incrementaVitoriasSeguidas();
+    return apostar(10);
 }
 
 int Truco::valorCarta(std::pair<char,std::string> cartas) {
@@ -316,18 +318,32 @@ int Truco::valorCarta(std::pair<char,std::string> cartas) {
     if(cartas.first=='4'){
         return valor = 1;
     }
+    if(cartas.first=='D'){
+        return valor = 20;
+    }
+    if(cartas.first=='9'){
+        return valor = 20;
+    }
+    if(cartas.first=='8'){
+        return valor = 20;
+    }
     return 0;
 }
 
 void Truco::distribuirCartas(Jogador a) { 
-
     
     for(int i=0;i<3;i++) {
-        while(_baralho[i+aux].first == '8' || _baralho[i+aux].first == '9' || _baralho[i+aux].first == 'D'){ 
+        while(valorCarta(_baralho[i+aux])==20) { 
             aux++;
         }
         a.set_cartas(_baralho[i+aux], i);
-        _crupie[i].first=_baralho[i+aux+3].first;
-        _crupie[i].second=_baralho[i+aux+3].second;
-}
+    }
+
+    for(int i=3;i<6;i++) {
+        while(valorCarta(_baralho[i+aux])==20) { 
+            aux++;
+        }        
+        _crupie[i-3].first=_baralho[i+aux].first;
+        _crupie[i-3].second=_baralho[i+aux].second;
+    }
 }

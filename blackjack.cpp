@@ -177,8 +177,9 @@ void Blackjack::jogar(Jogador a) {
 
 }
 
-void Blackjack::vitoria(Jogador a) {
+double Blackjack::vitoria(Jogador a) {
     a.incrementaVitoriasSeguidas();
+    return apostar(10);
 }
 
 void Blackjack::distribuirCartas(Jogador a) { 
