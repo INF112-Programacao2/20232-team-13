@@ -49,7 +49,7 @@ int Blackjack::valorCarta(std::pair<char,std::string> cartas) {
 void Blackjack::jogar(Jogador a) {
     embaralhar();
     distribuirCartas(a);
-    a.set_cartas(_baralho[12], 0);
+    a.set_cartas(_baralho[4], 0);
     std::pair<char,std::string> carta;
     int contaux = 0;
     std::string decisao;

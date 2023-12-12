@@ -3,6 +3,7 @@
 #include "blackjack.h"
 #include <iostream>
 #include "pif.h"
+#include "truco.h"
 
 int main() { 
     std::string Jogo;
@@ -32,6 +33,13 @@ int main() {
     A.~Jogador();
     }
 
+
+    if(Jogo == "Truco"){
+    Jogador A(3);
+    Truco B;
+    B.jogar(A);
+    A.~Jogador();
+    }
 
 
 

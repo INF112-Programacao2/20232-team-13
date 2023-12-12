@@ -7,7 +7,9 @@ class Truco:public Jogos {
     public:
     Truco();
     ~Truco();
-    void jogar();
-    void vitoria();
+    void jogar(Jogador a) override;
+    void vitoria(Jogador a) override;
+    int valorCarta(std::pair<char,std::string> cartas);
+    void distribuirCartas(Jogador a);
 };
 #endif
