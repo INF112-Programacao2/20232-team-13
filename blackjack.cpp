@@ -1,10 +1,11 @@
 #include "blackjack.h"
 #include "jogador.h"
 #include <iostream>
+#include <exception>
 
 int contcrupie = 2;
 int cont = 2;
-int cartasdadas = 4;
+int cartasdadas = 5;
 int pontuacao = 0;
 int pontuacaoBot = 0;
 
@@ -95,6 +96,10 @@ void Blackjack::jogar(Jogador a) {
         std::cout << "Sua pontuacao: " << pontuacao << std::endl;
         std::cout << "Quer pegar mais uma carta? (Responda com sim ou nao!) : " << std::endl;
         std::cin >> decisao;
+
+        if(decisao!="sim" && decisao!="nao") {
+            throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+        }    
 
         while(decisao=="sim"){
 
@@ -247,9 +252,10 @@ void Blackjack::jogar(Jogador a) {
 
 }
 
-double Blackjack::vitoria(Jogador a) {
+void Blackjack::vitoria(Jogador a) {
     a.incrementaVitoriasSeguidas();
-    return apostar(10);
+    a.decrescimoCarteira(10.0);
+    a.incrementoCarteira(apostar(10.0));
 }
 
 void Blackjack::distribuirCartas(Jogador a) { 

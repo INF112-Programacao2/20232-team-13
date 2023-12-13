@@ -1,8 +1,14 @@
 #include "jogador.h"
 #include <iostream>
 #include <string>
+#include <typeinfo>
 
 Jogador::Jogador(int cartas){ 
+    std::cout << "Qual a quantia desejada para deposito?" << std::endl;
+    std::cin >> _carteira;
+    if(_carteira==0) {
+        throw std::invalid_argument("Digite somente numeros!");
+    }
     _vitorias_seguidas = 0;
     _cartas = new std::pair<char,std::string>[cartas];
 }
@@ -34,4 +40,16 @@ void Jogador::set_numeroCartas(int cartas) {
 
 void Jogador::incrementaVitoriasSeguidas() {
     _vitorias_seguidas++;
+}
+
+void Jogador::incrementoCarteira(double aposta) {
+    _carteira+=aposta;
+}
+
+double Jogador::get_carteira() {
+    return _carteira;
+}
+
+void Jogador::decrescimoCarteira(double valor) {
+    _carteira=-10;
 }

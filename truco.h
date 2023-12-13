@@ -10,7 +10,7 @@ class Truco:public Jogos {
     ~Truco();
     
     void jogar(Jogador a) override;
-    double vitoria(Jogador a) override;
+    void vitoria(Jogador a) override;
     int valorCarta(std::pair<char,std::string> cartas);
     void distribuirCartas(Jogador a);
 };

@@ -3,8 +3,9 @@
 #include "truco.h"
 #include <iostream>
 #include <string>
+#include <exception>
 
-int aux = 0;
+int aux = 7;
 
 Truco::Truco() : Jogos(3,52) {}
     
@@ -14,7 +15,7 @@ void Truco::jogar(Jogador a) {
 
     embaralhar();
     distribuirCartas(a);
-    a.set_cartas(_baralho[3+aux], 0);
+    a.set_cartas(_baralho[6], 0);
     std::pair<char,std::string> carta;
     
     for(int i=0;i<3;i++) {
@@ -28,6 +29,20 @@ void Truco::jogar(Jogador a) {
         }
        
         a.set_cartas(carta, i);
+    }
+
+    for(int i=3;i<6;i++) {
+        carta.first=_crupie[i-3].first;
+        carta.second=_crupie[i-3].second;
+        
+        while(valorCarta(carta)==20) {
+            carta.first=_baralho[aux+i].first;
+            carta.second=_baralho[aux+i].second;
+            aux++;
+        }
+       
+        _crupie[i-3].first=carta.first;
+        _crupie[i-3].second=carta.second;  
     }
    
     int placar = 0;
@@ -44,6 +59,11 @@ void Truco::jogar(Jogador a) {
     std::cout << "Faca sua jogada: " << std::endl;
     std::cin >> escolha;
     std::cout << std::endl;
+
+    
+    if(escolha>3||escolha<=0) {
+        throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+    }    
 
     if((escolha==1)){
 
@@ -66,9 +86,26 @@ void Truco::jogar(Jogador a) {
         carta.second = "vazio";
         a.set_cartas(carta, 0);
 
+        std::cout << std::endl;
 
         std::cout << "Qual sua proxima escolha?: " << std::endl;
         std::cin >> escolha;
+        std::cout << std::endl;
+
+        if(escolha>3||escolha<=0)
+            throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+
+
+        while(a.get_valorCartas(escolha-1)==0||a.get_naipeCartas(escolha-1)=="vazio") {
+            std::cout << "Carta ja escolhida, escolha novamente: " << std::endl;
+            std::cin >> escolha;
+            std::cout << std::endl; 
+
+            if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+
+        }
+
         rodada++;
         std::cout << std::endl;
     }
@@ -96,6 +133,22 @@ void Truco::jogar(Jogador a) {
             
         std::cout << "Qual sua proxima escolha?: " << std::endl;
         std::cin >> escolha;
+        std::cout << std::endl;
+
+        if(escolha>3||escolha<=0)
+            throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+
+
+        while(a.get_valorCartas(escolha-1)==0||a.get_naipeCartas(escolha-1)=="vazio") {
+            std::cout << "Carta ja escolhida, escolha novamente: " << std::endl;
+            std::cin >> escolha;
+            std::cout << std::endl;
+
+            if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+
+        }
+
         rodada++;
         std::cout << std::endl;
     }
@@ -121,6 +174,20 @@ void Truco::jogar(Jogador a) {
             
         std::cout << "Qual sua proxima escolha?: " << std::endl;
         std::cin >> escolha;
+        std::cout << std::endl;
+
+        if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+
+        while(a.get_valorCartas(escolha-1)==0||a.get_naipeCartas(escolha-1)=="vazio") {
+            std::cout << "Carta ja escolhida, escolha novamente: " << std::endl;
+            std::cin >> escolha;
+            std::cout << std::endl;
+
+            if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+        }
+
         rodada++;
         std::cout << std::endl;
     }
@@ -146,6 +213,21 @@ void Truco::jogar(Jogador a) {
             
         std::cout << "Qual sua proxima escolha?: " << std::endl;
         std::cin >> escolha;
+        std::cout << std::endl;
+
+        if(escolha>3||escolha<=0)
+            throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+
+        while(a.get_valorCartas(escolha-1)==0||a.get_naipeCartas(escolha-1)=="vazio") {
+            std::cout << "Carta ja escolhida, escolha novamente: " << std::endl;
+            std::cin >> escolha;
+            std::cout << std::endl;
+
+            if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+            
+        }
+
         rodada++;
         std::cout << std::endl;
     }
@@ -171,6 +253,20 @@ void Truco::jogar(Jogador a) {
             
         std::cout << "Qual sua proxima escolha?: " << std::endl;
         std::cin >> escolha;
+        std::cout << std::endl;
+
+        if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+
+        while(a.get_valorCartas(escolha-1)==0||a.get_naipeCartas(escolha-1)=="vazio") {
+            std::cout << "Carta ja escolhida, escolha novamente: " << std::endl;
+            std::cin >> escolha;
+            std::cout << std::endl;
+
+            if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+        }
+
         rodada++;
         std::cout << std::endl;
     }
@@ -196,6 +292,20 @@ void Truco::jogar(Jogador a) {
             
         std::cout << "Qual sua proxima escolha?: " << std::endl;
         std::cin >> escolha;
+        std::cout << std::endl;
+
+        if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+
+        while(a.get_valorCartas(escolha-1)==0||a.get_naipeCartas(escolha-1)=="vazio") {
+            std::cout << "Carta ja escolhida, escolha novamente: " << std::endl;
+            std::cin >> escolha;
+            std::cout << std::endl;
+
+            if(escolha>3||escolha<=0)
+                throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
+        }
+
         rodada++;
         std::cout << std::endl;
     }
@@ -274,9 +384,10 @@ void Truco::jogar(Jogador a) {
         std::cout << "VOCE PERDEU! :(((" << std::endl;
 }
 
-double Truco::vitoria(Jogador a) {
+void Truco::vitoria(Jogador a) {
     a.incrementaVitoriasSeguidas();
-    return apostar(10);
+    a.decrescimoCarteira(10.0);
+    a.incrementoCarteira(apostar(10.0));
 }
 
 int Truco::valorCarta(std::pair<char,std::string> cartas) {
@@ -338,17 +449,8 @@ int Truco::valorCarta(std::pair<char,std::string> cartas) {
 void Truco::distribuirCartas(Jogador a) { 
     
     for(int i=0;i<3;i++) {
-        while(valorCarta(_baralho[i+aux])==20) { 
-            aux++;
-        }
-        a.set_cartas(_baralho[i+aux], i);
-    }
-
-    for(int i=3;i<6;i++) {
-        while(valorCarta(_baralho[i+aux])==20) { 
-            aux++;
-        }        
-        _crupie[i-3].first=_baralho[i+aux].first;
-        _crupie[i-3].second=_baralho[i+aux].second;
+        a.set_cartas(_baralho[i], i);
+        _crupie[i].first=_baralho[i+3].first;
+        _crupie[i].second=_baralho[i+3].second;
     }
 }
