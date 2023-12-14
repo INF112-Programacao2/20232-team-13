@@ -32,4 +32,4 @@ Se baseia em valores pré-definidos das carta, de modo que cada jogador joga uma
 
 . Para compilar utilize o comando "make" e logo após utile o ./cassino, ou então basta utilizar o comando "make run" para compilar e executar direto.
 
-Desenvolvido por Rórion Araújo Silva e André Luiz Viera de Faria.
+Desenvolvido por Rórion Araújo Silva - 105478 e André Luiz Viera de Faria - 106450.
