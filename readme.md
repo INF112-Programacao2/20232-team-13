@@ -1,6 +1,6 @@
-.Hub de Jogos de baralho(Cassino) online!!!
+. Hub de Jogos de baralho(Cassino) online!!!
 
-.Conta com 3 jogos implementados:
+. Conta com 3 jogos implementados:
 
 1) Blackjack
 
@@ -9,7 +9,7 @@
 3) Truco
 
 
-.Regras:
+. Regras:
 
 1) Blackjack:
 Também conhecido como 21, consiste no jogador e o crupiê competirem, ganhando aquele que, com a soma dos valores de suas cartas, chegue o mais próximo de 21 sem ultrapassar esse valor(estourar). Caso os dois alcancem o mesmo valor ocorre um empate, já quando alguém estoura está instantaneamente eliminado.
@@ -24,7 +24,7 @@ Consiste no jogador fazer 2 trincas/sequências, de modo que o primeiro a conseg
 . Tantas rodadas quanto forem necessárias para um dos jogadores bater ou o baralho acabar.
 . Cartas do oponente só são reveladas quando ele bate.
 
-3)Truco:
+3) Truco:
 Se baseia em valores pré-definidos das carta, de modo que cada jogador joga uma carta por rodada. Assim, a carta com maio valor mata a outra e quem a jogou ganha a rodada. Vence aquele que ganhar 2 rodadas ou mais.
 . 3 cartas para cada.
 . 3 rodadas.
