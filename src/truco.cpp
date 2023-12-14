@@ -1,23 +1,33 @@
-#include "jogos.h"
-#include "jogador.h"
-#include "truco.h"
+#include "../include/jogador.h"
+#include "../include/truco.h"
+#include "../include/jogos.h"
 #include <iostream>
 #include <string>
 #include <exception>
 
+//Variaveis Globais inicializadas
 int aux = 7;
 
+//Construtor
 Truco::Truco() : Jogos(3,52) {}
-    
+
+//Destrutor
 Truco::~Truco() {}
 
-void Truco::jogar(Jogador a) { 
 
+void Truco::jogar(Jogador a) { 
+    //Reinicializacao de variavel
+    aux = 7;
+
+    //Distribui as cartas
     embaralhar();
     distribuirCartas(a);
     a.set_cartas(_baralho[6], 0);
+
+    //Variaveis
     std::pair<char,std::string> carta;
     
+    //Distribui as cartas para o jogador e crupie
     for(int i=0;i<3;i++) {
         carta.first=a.get_valorCartas(i);
         carta.second=a.get_naipeCartas(i);
@@ -44,11 +54,13 @@ void Truco::jogar(Jogador a) {
         _crupie[i-3].first=carta.first;
         _crupie[i-3].second=carta.second;  
     }
-   
+
+    //Variaveis incializadas
     int placar = 0;
     int rodada = 1;
     int escolha;
 
+    //Imprime as cartas do jogador
     std::cout << "Suas Cartas: " << std::endl;
         for(int i=0;i<3;i++){
             carta.first = a.get_valorCartas(i);
@@ -56,25 +68,30 @@ void Truco::jogar(Jogador a) {
             std::cout << i+1 << ") " << carta.first << " de " << carta.second << std::endl;
         }
 
+    //Pede a jogada
     std::cout << "Faca sua jogada: " << std::endl;
     std::cin >> escolha;
     std::cout << std::endl;
 
-    
+    //Tratamento de excessao
     if(escolha>3||escolha<=0) {
         throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
     }    
 
+    //Teste de todos os casos
+    //Realiza o primeiro caso
     if((escolha==1)){
 
         carta.first = a.get_valorCartas(0);
         carta.second = a.get_naipeCartas(0);
 
+        //Mostra a carta do jogador e a do crupie
         std::cout << "Sua carta: " << std::endl;
         std::cout << a.get_valorCartas(0) << " de " << a.get_naipeCartas(0) << std::endl;
         std::cout << "Carta do crupie: " << std::endl;
         std::cout << _crupie[0].first << " de " << _crupie[0].second << std::endl;
 
+        //Compara qual carta mata a outra
         if(valorCarta(carta)>valorCarta(_crupie[0])){
             placar++;
             std::cout << "Voce ganhou a rodada :)" << std::endl;
@@ -82,16 +99,19 @@ void Truco::jogar(Jogador a) {
         else
             std::cout << "Voce perdeu a rodada :(" << std::endl;
 
+        //Zera a posição da carta escolhida
         carta.first = '0';
         carta.second = "vazio";
         a.set_cartas(carta, 0);
 
         std::cout << std::endl;
 
+        //Pergunta a próxima escolha
         std::cout << "Qual sua proxima escolha?: " << std::endl;
         std::cin >> escolha;
         std::cout << std::endl;
 
+        //Tratamento de excessao
         if(escolha>3||escolha<=0)
             throw std::invalid_argument("Escolha uma das opcoes de 1 a 3!");
 
@@ -110,7 +130,7 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
-
+    //Teste segundo caso
     if(escolha==2 && rodada==1){
         carta.first = a.get_valorCartas(1);
         carta.second = a.get_naipeCartas(1);
@@ -153,6 +173,7 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
+    //Teste terceiro caso
     if(escolha==3 && rodada==1){
         carta.first = a.get_valorCartas(2);
         carta.second = a.get_naipeCartas(2);
@@ -192,6 +213,7 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
+    //Teste quarto caso
     if(escolha==1 && rodada==2){
         carta.first = a.get_valorCartas(0);
         carta.second = a.get_naipeCartas(0);
@@ -232,6 +254,7 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
+    //Teste quinto caso
     if(escolha==2 && rodada==2){
         carta.first = a.get_valorCartas(1);
         carta.second = a.get_naipeCartas(1);
@@ -271,6 +294,7 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
+    //Teste sexto caso
     if(escolha==3 && rodada==2){
         carta.first = a.get_valorCartas(2);
         carta.second = a.get_naipeCartas(2);
@@ -310,6 +334,7 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
+    //Teste setimo caso
     if(escolha==1 && rodada==3){
         carta.first = a.get_valorCartas(0);
         carta.second = a.get_naipeCartas(0);
@@ -332,6 +357,7 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
+    ////Teste oitavo caso
     if(escolha==2 && rodada==3){
         carta.first = a.get_valorCartas(1);
         carta.second = a.get_naipeCartas(1);
@@ -354,6 +380,7 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
+    //Testa nono caso
     if(escolha==3 && rodada==3){
         carta.first = a.get_valorCartas(2);
         carta.second = a.get_naipeCartas(2);
@@ -376,20 +403,15 @@ void Truco::jogar(Jogador a) {
         std::cout << std::endl;
     }
 
+    //Testa para saber quem ganhou o jogo
     if(placar>=2){
         std::cout << "VOCE GANHOU! :)))" << std::endl;
-        vitoria(a);
     }
     else 
         std::cout << "VOCE PERDEU! :(((" << std::endl;
 }
 
-void Truco::vitoria(Jogador a) {
-    a.incrementaVitoriasSeguidas();
-    a.decrescimoCarteira(10.0);
-    a.incrementoCarteira(apostar(10.0));
-}
-
+//Retorna o valor que cada carta representa no truco
 int Truco::valorCarta(std::pair<char,std::string> cartas) {
     int valor;
     if(cartas.first=='4'&&cartas.second=="Paus"){
@@ -446,6 +468,7 @@ int Truco::valorCarta(std::pair<char,std::string> cartas) {
     return 0;
 }
 
+//Funcao que distribui as cartas
 void Truco::distribuirCartas(Jogador a) { 
     
     for(int i=0;i<3;i++) {

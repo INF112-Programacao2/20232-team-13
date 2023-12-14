@@ -1,10 +1,9 @@
-#include "jogos.h"
+#include "../include/jogos.h"
 #include <cstdlib>
 #include <ctime>
 
-
+//Construtor
 Jogos::Jogos(int crupie, int baralho) {
-    _odds=2.0;
     _crupie=new std::pair<char,std::string>[crupie];
     _baralho=new std::pair<char,std::string>[baralho];
     
@@ -13,14 +12,12 @@ Jogos::Jogos(int crupie, int baralho) {
     }
 }
 
+//Destrutor
 Jogos::~Jogos() {
     delete[] _crupie;
 }
 
-double Jogos::get_odds() {
-    return _odds;
-}
-
+//Geters e Seters 
 char Jogos::get_valor(int x) {
     return _valor[x];
 }
@@ -29,14 +26,7 @@ std::string Jogos::get_naipes(int x) {
     return _naipes[x];
 }
 
-void Jogos::set_odds(double odds) {
-    _odds=odds;
-}
-
-double Jogos::apostar(double aposta) {
-    return aposta*_odds;
-}
-
+//Função que embaralha as cartas
 void Jogos::embaralhar() {
     
     srand(time(0));

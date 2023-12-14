@@ -1,0 +1,11 @@
+all: cassino
+
+cassino:
+	g++ src/blackjack.cpp src/jogador.cpp src/jogos.cpp src/main.cpp src/pif.cpp src/truco.cpp -o cassino
+
+clean:
+	rm -rf *.o
+	rm -rf cassino
+
+run: cassino
+	./cassino
